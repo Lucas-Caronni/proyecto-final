@@ -12,7 +12,7 @@ export default function AppNavigator(){
 
             <Stack.Screen name='Login' component={Login} />
             <Stack.Screen name='Register' component={Register} />
-            <Stack.Screen name="BottomTabs" component={BottomTabs} />
+            <Stack.Screen name="Tab" component={BottomTabs} />
 
         </Stack.Navigator>
     )

@@ -3,12 +3,12 @@ import firebase from 'firebase'
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDhuyYLu5iel_zROA6_8LIFxVHUDRRzf-Y",
-  authDomain: "proyecto-integrador-939cf.firebaseapp.com",
-  projectId: "proyecto-integrador-939cf",
-  storageBucket: "proyecto-integrador-939cf.firebasestorage.app",
-  messagingSenderId: "178422556781",
-  appId: "1:178422556781:web:9b62c3fff03b8386a2b764"
+  apiKey: "AIzaSyDmeTiVUVS06rwRbI4gS80LJ4T4jHCn13Q",
+  authDomain: "primer-firebase-a645f.firebaseapp.com",
+  projectId: "primer-firebase-a645f",
+  storageBucket: "primer-firebase-a645f.firebasestorage.app",
+  messagingSenderId: "644332551904",
+  appId: "1:644332551904:web:86507ff2ff0c9176a6da85"
 };
 
   app.initializeApp(firebaseConfig)

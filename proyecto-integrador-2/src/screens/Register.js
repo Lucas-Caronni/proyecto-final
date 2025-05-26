@@ -17,13 +17,14 @@ export default class Register extends Component {
   }
 
   registarUsuario(email, password, username){
+    console.log('datos', email, password, username)
     if ((email !== '' 
         &&
         password !== ''
         && username !== '')
         && password.length >= 6 
         && email.includes('@')
-        && username >= 3
+        && username.length >= 3
         ){
         auth.createUserWithEmailAndPassword(email, password)
         .then(()=> {
@@ -40,7 +41,10 @@ export default class Register extends Component {
         })
         .catch((err) => console.log('err:', err))
         }
-    }
+        else {
+            console.log('error en el else')
+        }
+    } 
    
   render() {
     return(
