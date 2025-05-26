@@ -10,9 +10,9 @@ export default function AppNavigator(){
     return(
         <Stack.Navigator>
 
-            <Stack.Screen name='Login' component={Login} />
-            <Stack.Screen name='Register' component={Register} />
-            <Stack.Screen name="Tab" component={BottomTabs} />
+            <Stack.Screen name='Login' component={Login} options={{headerShown: false}} />
+            <Stack.Screen name='Register' component={Register} options={{headerShown: false}}/>
+            <Stack.Screen name="Tab" component={BottomTabs} options={{headerShown: false}}/>
 
         </Stack.Navigator>
     )

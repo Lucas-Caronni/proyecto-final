@@ -17,11 +17,12 @@ redireccionar = (screenName)=>{
     }
 
 componentDidMount(){
-    auth.onAuthStateChanged((user)=> {
-        if(user){
-        this.redireccionar('Tab')
-          }
-        })}
+  auth.onAuthStateChanged((user) => {
+    if(user){
+      this.props.navigation.navigate('Tab')
+    }
+  })
+} //esto lo que va a hacer es mandarme derecho a tab si ya estoy con la sesion iniciada
 
 loguearUsuario(email, password){
     if ((email !== '' &&
