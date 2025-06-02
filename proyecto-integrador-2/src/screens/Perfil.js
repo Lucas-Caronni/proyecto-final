@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, FlatList, StyleShee, StyleSheet } from 'react-native'
 import React, {Component} from 'react'
 import { auth, db } from '../firebase/config'
 import Post from '../components/Post'
@@ -52,18 +52,20 @@ export default class Perfil extends Component {
   
   render(){
     return (
-      <View>
-        <Text>Perfil</Text>
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.title}>Perfil</Text>
 
         <FlatList
         data = {this.state.usuario}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({item}) =><View> <Text>{item.data.username}</Text> <Text>{item.data.owner}</Text></View>}
+        renderItem={({item}) =><View style={styles.userItem}> <Text style={styles.userText}>{item.data.username}</Text> <Text style={styles.userText}>{item.data.owner}</Text></View>}
         />
 
-         <Text>Posteos</Text>
+        <View style={styles.userItem}>
+        <Text style={styles.userText}>Posteos</Text>
         {this.state.posteos.length === 0 ? 
-        (<Text>No tenes posteos</Text>) : (
+        (<Text style={styles.userText}>No tenes posteos</Text>) : (
         <FlatList
          data={this.state.posteos}
          keyExtractor={(item) => item.id.toString()}
@@ -71,11 +73,70 @@ export default class Perfil extends Component {
         <Post id={item.id} data={item.data} />
         )}/>)     
         }
+        </View>
 
-        <TouchableOpacity onPress={() => this.logout()}>
-          <Text>Cerrar Sesion</Text>
+        <TouchableOpacity style={styles.logoutButton} onPress={() => this.logout()}>
+          <Text style={styles.logoutText}>Cerrar Sesion</Text>
         </TouchableOpacity>
       </View>
+    </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+  },
+  card: {
+    width: '85%',
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+
+  title: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+    color: '#222',
+  },
+  userItem: {
+    backgroundColor: '#e9ecef',
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+  userText: {
+    fontSize: 16,
+    color: '#333',
+
+  },
+  logoutButton: {
+    backgroundColor: '#f4a261',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+  logoutText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
+
+})
