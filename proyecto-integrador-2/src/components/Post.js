@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import { auth, db } from '../firebase/config'
 import firebase from 'firebase'
@@ -53,28 +53,28 @@ export default class Post extends Component {
 
     render() {
         return (
-            <View>
-                <Text>{this.props.data.description}</Text>
-                <Text>{this.props.data.owner}</Text>
+            <View style={styles.postContainer}>
+                <Text style={styles.description}>{this.props.data.description}</Text>
+                <Text style={styles.owner}>From: {this.props.data.owner}</Text>
 
-                <Text>Cantidad de me gusta: {this.state.cantMeGusta}</Text>
+                <Text style={styles.likes}>Cantidad de me gusta: {this.state.cantMeGusta}</Text>
 
                 {
                     this.state.meGusta ?
-                        <TouchableOpacity onPress={() => this.unlikePost()}>
-                            <Text>Ya no me gusta</Text>
+                        <TouchableOpacity style={styles.button} onPress={() => this.unlikePost()}>
+                            <Text style={styles.buttonText}>Ya no me gusta</Text>
                         </TouchableOpacity>
                         :
-                        <TouchableOpacity onPress={() => this.likearPost()}>
-                            <Text>Me gusta</Text>
+                        <TouchableOpacity style={styles.button} onPress={() => this.likearPost()}>
+                            <Text style={styles.buttonText}>Me gusta</Text>
                         </TouchableOpacity>
                 }
 
                 {/* Mostrar botón de borrar solo si el post es del usuario actual */}
                 {
                     this.props.data.owner === auth.currentUser.email ?
-                        <TouchableOpacity onPress={() => this.borrarPost()}>
-                            <Text>Borrar posteo</Text>
+                        <TouchableOpacity style={styles.deletePost} onPress={() => this.borrarPost()}>
+                            <Text style={styles.buttonText}>Borrar posteo</Text>
                         </TouchableOpacity>
                         : null
                 }
@@ -82,3 +82,48 @@ export default class Post extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    postContainer: {
+        alignItems: 'center',
+        backgroundColor: '#eeeeee',
+        margin: 10,                 
+        padding: 10,                
+        borderRadius: 8,
+        width: '50%',
+        alignSelf: 'center',
+        shadowColor: '#000'    
+      },
+      description: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 3,
+      },
+      owner: {
+        fontSize: 14,
+        color: '#333',
+        marginBottom: 3
+      },
+      likes: {
+        fontSize: 14,
+        marginBottom: 10,
+      },
+      button: {
+        backgroundColor: '#007AFF', 
+        paddingVertical: 6,
+        paddingHorizontal: 12,
+        borderRadius: 3,
+        marginBottom: 10
+      },
+      buttonText: {
+        color: 'white',
+        fontWeight: 'bold',
+      },
+      deletePost: {
+        backgroundColor: '#FF3B30',  
+        paddingVertical: 6,
+        paddingHorizontal: 12,
+        borderRadius: 3,
+        marginBottom: 10
+      }
+})

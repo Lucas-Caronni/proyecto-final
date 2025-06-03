@@ -27,7 +27,7 @@ export default class Home extends Component {
 //La lista de los posteos ya esta creada en orden de los mas recientes primero, ahora hay que mostralo en el return con un .map() y que se renderice uno por uno con un componente de Post.js
   render() {
     return (
-      <View>
+      <View style={styles.contenedor}>
         <Text style={styles.titulo}>Snapgram</Text>
         <FlatList
           data={this.state.posteos}
@@ -42,6 +42,10 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   titulo: {
     fontSize: 32,
-    textAlign: 'center'
+    textAlign: 'center',
+    padding: 10
+  },
+  contenedor: {
+    flex: 1
   }
 })

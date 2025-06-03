@@ -56,24 +56,25 @@ export default class Perfil extends Component {
       <View style={styles.card}>
         <Text style={styles.title}>Perfil</Text>
 
-        <FlatList
-        data = {this.state.usuario}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({item}) =><View style={styles.userItem}> <Text style={styles.userText}>{item.data.username}</Text> <Text style={styles.userText}>{item.data.owner}</Text></View>}
-        />
-
-        <View style={styles.userItem}>
-        <Text style={styles.userText}>Posteos</Text>
-        {this.state.posteos.length === 0 ? 
-        (<Text style={styles.userText}>No tenes posteos</Text>) : (
-        <FlatList
-         data={this.state.posteos}
-         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-        <Post id={item.id} data={item.data} />
-        )}/>)     
-        }
+        <View style={styles.header}>
+          <FlatList
+          data = {this.state.usuario}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({item}) =><View style={styles.userItem}> <Text style={styles.userText}>{item.data.username}</Text> <Text style={styles.userText}>{item.data.owner}</Text></View>}
+          />
         </View>
+
+          <Text style={styles.userText}>Posteos:</Text>
+          {this.state.posteos.length === 0 ? 
+          (<Text style={styles.userText}>No tenes posteos</Text>) : (
+          <FlatList
+          style={styles.postCard}
+          data={this.state.posteos}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+          <Post id={item.id} data={item.data} />
+          )}/>)     
+        }
 
         <TouchableOpacity style={styles.logoutButton} onPress={() => this.logout()}>
           <Text style={styles.logoutText}>Cerrar Sesion</Text>
@@ -86,12 +87,13 @@ export default class Perfil extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    flex: 1,                
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
+    padding: 20
   },
   card: {
+    flex: 1,
     width: '85%',
     paddingVertical: 20,
     paddingHorizontal: 15,
@@ -106,7 +108,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-
+  header: {
+    marginBottom: 10
+  },
   title: {
     fontSize: 26,
     fontWeight: 'bold',
@@ -122,8 +126,7 @@ const styles = StyleSheet.create({
   },
   userText: {
     fontSize: 16,
-    color: '#333',
-
+    color: '#333'
   },
   logoutButton: {
     backgroundColor: '#f4a261',
@@ -136,7 +139,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     textAlign: 'center',
-  },
-
+  }
 
 })
